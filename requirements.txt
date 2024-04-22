@@ -1,0 +1,10 @@
+python-dotenv==1.0.0
+random2==1.0.1
+openai==0.27.8
+gtts==2.2.3
+moviepy==1.0.3
+dotenv==0.0.5
+pysrt==1.1.2
+assemblyai==0.25.0
+pydub==0.25.1
+praw==7.7.1
