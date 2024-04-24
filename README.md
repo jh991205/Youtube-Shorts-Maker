@@ -30,6 +30,7 @@ You will also need to have FFmpeg installed, as it is used by `moviepy` for vide
 - Fill in the required API keys and other configuration settings in the .env file:
 CLIENT_ID, CLIENT_SECRET, and USER_AGENT for Reddit API access.
 ASSEMBLYAI_API_KEY for using AssemblyAI's transcription services.
+- Both the AssemblyAI API and Reddit API are free, only requires account creation
 
 ## Usage
 ### Run the script with:
