@@ -121,10 +121,10 @@ if final_video_check.duration > 58:
     final_short_clip = final_video_check.subclip(0, 58)
     final_short_path = "generated/final_short.mp4"
     final_short_clip.write_videofile(final_short_path, codec='libx264', remove_temp=True)
+    final_short_clip.close()
     print("Shortened video created:", final_short_path)
 else:
     print("No need to shorten the video.")
 
 final_video_check.close()
 final_video.close()
-final_short_clip.close()
