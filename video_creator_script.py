@@ -134,20 +134,36 @@ import os
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
+import google.auth.transport.requests
+import json
 
 scopes = ["https://www.googleapis.com/auth/youtube.upload"]
+credentials_file = 'credentials.json'
 
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+def get_authenticated_service():
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+    api_service_name = "youtube"
+    api_version = "v3"
+    client_secrets_file = "secret.json"
 
-api_service_name = "youtube"
-api_version = "v3"
-client_secrets_file = "secret.json"
+    credentials = None
+    if os.path.exists(credentials_file):
+        with open(credentials_file, 'r') as file:
+            credentials = google.oauth2.credentials.Credentials.from_authorized_user_info(json.load(file), scopes)
 
-flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
-    client_secrets_file, scopes)
-credentials = flow.run_local_server(port=0)
-youtube = googleapiclient.discovery.build(
-    api_service_name, api_version, credentials=credentials)
+    if not credentials or not credentials.valid:
+        if credentials and credentials.expired and credentials.refresh_token:
+            credentials.refresh(google.auth.transport.requests.Request())
+        else:
+            flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(client_secrets_file, scopes)
+            credentials = flow.run_local_server(port=0)
+
+        with open(credentials_file, 'w') as file:
+            file.write(credentials.to_json())
+
+    return googleapiclient.discovery.build(api_service_name, api_version, credentials=credentials)
+
+youtube = get_authenticated_service()
 
 request = youtube.videos().insert(
     part="snippet,status",
