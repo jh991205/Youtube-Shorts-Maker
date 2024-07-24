@@ -1,12 +1,10 @@
 import os
 import random
 from datetime import datetime
-
 from moviepy.editor import *
 import moviepy.video.fx.all as vfx
 import moviepy.video.fx.crop as crop_vid
 from gtts import gTTS
-from dotenv import load_dotenv
 import assemblyai as aai
 import pysrt
 import praw
@@ -15,13 +13,10 @@ import googleapiclient.discovery
 import googleapiclient.errors
 import google.auth.transport.requests
 import json
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
-
-# Initialize directories
-if not os.path.exists('generated'):
-    os.mkdir('generated')
 
 def get_current_datetime():
     return datetime.now().strftime("%Y%m%d_%H%M%S")
