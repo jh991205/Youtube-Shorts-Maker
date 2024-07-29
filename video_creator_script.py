@@ -14,6 +14,10 @@ def main():
     print("Title:", title)
     print("Content:", content)
 
+    if len(title) > 100:
+        print("Error: The title is too long for YouTube. Title length:", len(title))
+        return
+
     formatted_now = get_current_datetime()
 
     speech_path = generate_speech(content, f"generated/speech_{formatted_now}.mp3")
