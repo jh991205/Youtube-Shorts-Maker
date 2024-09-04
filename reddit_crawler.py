@@ -1,9 +1,9 @@
 import praw
 
 reddit = praw.Reddit(
-    client_id='pv_iMAfGPgH_QQTtmXrjWg',
-    client_secret='ign69Nww_VXwEbQhpgG_g_UXUOFJOA',
-    user_agent='script:reddit.aita.extractor:v1.0 (by /u/JD)',
+    client_id='',
+    client_secret='',
+    user_agent='',
 )
 
 # Access the AITA subreddit
