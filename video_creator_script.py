@@ -1,3 +1,5 @@
+import os
+
 from utility import (
     fetch_reddit_post,
     generate_speech,
@@ -10,6 +12,9 @@ from utility import (
 )
 
 def main():
+    if not os.path.exists('generated'):
+        os.makedirs('generated')
+        
     title, content = fetch_reddit_post()
     print("Title:", title)
     print("Content:", content)
